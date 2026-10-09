@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WNDR // Street Essentials</title>
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Space Grotesk & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              black: '#08080a',
+              card: '#121216',
+              border: '#23232b',
+              accent: '#ccff00',
+              muted: '#71717a'
+            }
+          },
+          fontFamily: {
+            heading: ['"Space Grotesk"', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #08080a;
+      color: #fafafa;
+      font-family: 'Inter', sans-serif;
+    }
+    .accent-glow {
+      box-shadow: 0 0 25px -4px rgba(204, 255, 0, 0.35);
+    }
+    .neon-text-glow {
+      text-shadow: 0 0 14px rgba(204, 255, 0, 0.45);
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #08080a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #23232b;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ccff00;
+    }
+  </style>
+</head>
+<body class="selection:bg-[#ccff00] selection:text-black">
+
+  <!-- 1. Top Live Marquee Banner -->
+  <div class="bg-[#ccff00] text-black font-mono text-xs font-bold py-2 overflow-hidden whitespace-nowrap border-b border-black">
+    <div class="flex animate-[marquee_20s_linear_infinite] gap-12 tracking-widest uppercase">
+      <span>⚡ DROP 04: "URBAN ARTIFACTS" IS NOW LIVE</span>
+      <span>• FREE EXPRESS DELIVERY OVER ₹1,499</span>
+      <span>• USE PROMO CODE: <span class="underline">WNDR20</span> FOR 20% OFF</span>
+      <span>• 280 GSM BOXY TEES & 460 GSM FRENCH TERRY HOODIES</span>
+      <span>⚡ DROP 04: "URBAN ARTIFACTS" IS NOW LIVE</span>
+      <span>• FREE EXPRESS DELIVERY OVER ₹1,499</span>
+      <span>• USE PROMO CODE: <span class="underline">WNDR20</span> FOR 20% OFF</span>
+    </div>
+  </div>
+
+  <style>
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+  </style>
+
+  <!-- 2. Sticky Header Bar -->
+  <header class="sticky top-0 z-40 bg-[#08080a]/90 backdrop-blur-md border-b border-[#23232b]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Monogram Logo -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 bg-white text-black flex items-center justify-center font-heading font-extrabold text-xl tracking-tighter rounded-sm group-hover:bg-[#ccff00] transition-colors duration-200">
+          <svg viewBox="0 0 40 40" class="w-7 h-7 fill-current" xmlns="http://www.w3.org/2000/svg">
+            <!-- Geometric Monogram [ W // R ] -->
+            <path d="M6 10L11 28L15 16L19 28L24 10H20L17 22L14 12L11 22L8 10H6Z" />
+            <path d="M26 10H33C35.5 10 37 11.5 37 14C37 16 35.8 17.2 34 17.7L38 28H33.5L30 18H29V28H26V10ZM29 15H32.5C33.5 15 34 14.6 34 14C34 13.4 33.5 13 32.5 13H29V15Z" />
+          </svg>
+        </div>
+        <div>
+          <span class="font-heading font-extrabold text-2xl tracking-tight block leading-none">WNDR</span>
+          <span class="font-mono text-[9px] uppercase tracking-[0.28em] text-[#ccff00] font-semibold">Street Essentials</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 font-mono text-xs uppercase tracking-wider text-neutral-300">
+        <a href="#drops" class="hover:text-[#ccff00] transition-colors">Catalog</a>
+        <a href="#specs" class="hover:text-[#ccff00] transition-colors">Specs & GSM</a>
+        <a href="#lookbook" class="hover:text-[#ccff00] transition-colors">Community</a>
+        <a href="#newsletter" class="hover:text-[#ccff00] transition-colors">Radar</a>
+      </nav>
+
+      <!-- Cart Button with Counter -->
+      <div class="flex items-center gap-4">
+        <button onclick="toggleCart()" class="relative p-2.5 bg-[#121216] border border-[#23232b] rounded-sm hover:border-[#ccff00] transition-colors flex items-center gap-2 group">
+          <i data-lucide="shopping-bag" class="w-5 h-5 text-white group-hover:text-[#ccff00]"></i>
+          <span id="cart-counter" class="bg-[#ccff00] text-black text-[11px] font-mono font-bold px-1.5 py-0.5 rounded-full min-w-[20px] text-center">0</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- 3. Hero Section -->
+  <section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden border-b border-[#23232b]">
+    <div class="absolute inset-0 z-0">
+      <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=1920&q=80" 
+           alt="Streetwear Hero" 
+           class="w-full h-full object-cover opacity-25 filter grayscale contrast-125" />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#08080a] via-[#08080a]/70 to-transparent"></div>
+    </div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-4 text-center py-20">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#ccff00]/40 bg-[#ccff00]/10 text-[#ccff00] font-mono text-xs uppercase tracking-widest mb-6">
+        <span class="w-2 h-2 rounded-full bg-[#ccff00] animate-ping"></span>
+        <span>Drop 04 // 2026 Collection</span>
+      </div>
+
+      <h1 class="font-heading text-5xl sm:text-7xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-6">
+        Engineered for <br/>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-[#ccff00]">Subculture.</span>
+      </h1>
+
+      <p class="max-w-xl mx-auto text-neutral-400 text-sm sm:text-base font-body mb-10 leading-relaxed">
+        High-density 280 GSM combed cottons, boxy architectural fits, and zero-compromise hardware crafted for skate, rave, and daily street utility.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#drops" class="w-full sm:w-auto px-8 py-4 bg-[#ccff00] text-black font-heading font-extrabold uppercase text-sm tracking-wider hover:bg-white transition-all transform hover:-translate-y-0.5 accent-glow flex items-center justify-center gap-2">
+          <span>Shop The Drop</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+        <a href="#specs" class="w-full sm:w-auto px-8 py-4 bg-[#121216] border border-[#23232b] text-white font-heading font-bold uppercase text-sm tracking-wider hover:border-[#ccff00] transition-colors">
+          View Specifications
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Textile Architecture / Specs Strip -->
+  <section id="specs" class="py-16 border-b border-[#23232b] bg-[#0c0c10]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        
+        <div class="p-6 border border-[#23232b] bg-[#121216]/60 rounded-sm">
+          <div class="text-[#ccff00] font-heading text-3xl font-extrabold mb-1">280 GSM</div>
+          <div class="text-xs uppercase font-mono tracking-wider text-neutral-400">Combed Compact Cotton</div>
+        </div>
+
+        <div class="p-6 border border-[#23232b] bg-[#121216]/60 rounded-sm">
+          <div class="text-[#ccff00] font-heading text-3xl font-extrabold mb-1">460 GSM</div>
+          <div class="text-xs uppercase font-mono tracking-wider text-neutral-400">French Terry Fleece</div>
+        </div>
+
+        <div class="p-6 border border-[#23232b] bg-[#121216]/60 rounded-sm">
+          <div class="text-[#ccff00] font-heading text-3xl font-extrabold mb-1">BOXY FIT</div>
+          <div class="text-xs uppercase font-mono tracking-wider text-neutral-400">Dropped Shoulder Cut</div>
+        </div>
+
+        <div class="p-6 border border-[#23232b] bg-[#121216]/60 rounded-sm">
+          <div class="text-[#ccff00] font-heading text-3xl font-extrabold mb-1">0% SHRINK</div>
+          <div class="text-xs uppercase font-mono tracking-wider text-neutral-400">Pre-Washed & Steamed</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Product Catalog Section -->
+  <section id="drops" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+      <div>
+        <div class="font-mono text-xs uppercase text-[#ccff00] tracking-widest mb-2">// CATALOG ARCHIVE</div>
+        <h2 class="font-heading text-4xl sm:text-5xl font-black uppercase tracking-tight">Drop 04 Silhouettes</h2>
+      </div>
+
+      <!-- Filter Controls -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none font-mono text-xs">
+        <button onclick="filterCategory('all')" class="cat-btn px-4 py-2 bg-[#ccff00] text-black font-bold uppercase rounded-sm border border-[#ccff00]" data-cat="all">All Items</button>
+        <button onclick="filterCategory('tee')" class="cat-btn px-4 py-2 bg-[#121216] text-neutral-300 font-bold uppercase rounded-sm border border-[#23232b] hover:border-[#ccff00]" data-cat="tee">Tees (280 GSM)</button>
+        <button onclick="filterCategory('hoodie')" class="cat-btn px-4 py-2 bg-[#121216] text-neutral-300 font-bold uppercase rounded-sm border border-[#23232b] hover:border-[#ccff00]" data-cat="hoodie">Hoodies (460 GSM)</button>
+        <button onclick="filterCategory('headwear')" class="cat-btn px-4 py-2 bg-[#121216] text-neutral-300 font-bold uppercase rounded-sm border border-[#23232b] hover:border-[#ccff00]" data-cat="headwear">Headwear</button>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Items dynamically injected via JS below -->
+    </div>
+  </section>
+
+  <!-- 6. Community Lookbook Strip -->
+  <section id="lookbook" class="py-20 border-t border-[#23232b] bg-[#0c0c10]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="font-mono text-xs uppercase text-[#ccff00] tracking-widest">// STREET RADAR</span>
+        <h2 class="font-heading text-3xl sm:text-4xl font-extrabold uppercase tracking-tight mt-2">Worn By The Culture</h2>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="relative group aspect-square overflow-hidden rounded-sm bg-[#121216]">
+          <img src="https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=600&q=80" alt="Lookbook 1" class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300" />
+          <div class="absolute bottom-2 left-2 bg-black/80 px-2 py-1 text-[10px] font-mono text-[#ccff00]">BOMBAY // 19:42</div>
+        </div>
+        <div class="relative group aspect-square overflow-hidden rounded-sm bg-[#121216]">
+          <img src="https://images.unsplash.com/photo-1523381294911-8d3cead13475?auto=format&fit=crop&w=600&q=80" alt="Lookbook 2" class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300" />
+          <div class="absolute bottom-2 left-2 bg-black/80 px-2 py-1 text-[10px] font-mono text-[#ccff00]">DELHI // 23:10</div>
+        </div>
+        <div class="relative group aspect-square overflow-hidden rounded-sm bg-[#121216]">
+          <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80" alt="Lookbook 3" class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300" />
+          <div class="absolute bottom-2 left-2 bg-black/80 px-2 py-1 text-[10px] font-mono text-[#ccff00]">BLR // 14:05</div>
+        </div>
+        <div class="relative group aspect-square overflow-hidden rounded-sm bg-[#121216]">
+          <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=600&q=80" alt="Lookbook 4" class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300" />
+          <div class="absolute bottom-2 left-2 bg-black/80 px-2 py-1 text-[10px] font-mono text-[#ccff00]">PUNE // 02:18</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Footer & Newsletter -->
+  <footer id="newsletter" class="border-t border-[#23232b] bg-[#08080a] py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-[#23232b]">
+        
+        <div class="md:col-span-5">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-8 h-8 bg-white text-black flex items-center justify-center font-heading font-extrabold text-lg rounded-sm">
+              W
+            </div>
+            <span class="font-heading font-bold text-xl tracking-tight">WNDR</span>
+          </div>
+          <p class="text-neutral-400 text-xs font-mono max-w-sm leading-relaxed mb-6">
+            Street essentials engineered from heavy-gauge natural fibers. Independent subculture supply label based in India.
+          </p>
+          <div class="flex gap-4 text-xs font-mono text-neutral-400">
+            <span>© 2026 WNDR SUPPLY CO.</span>
+            <span>ALL RIGHTS RESERVED.</span>
+          </div>
+        </div>
+
+        <div class="md:col-span-7">
+          <span class="font-mono text-xs uppercase text-[#ccff00] tracking-widest block mb-2">// VIP ACCESS</span>
+          <h4 class="font-heading text-xl font-bold uppercase mb-4">Subscribe to Private Drop Radar</h4>
+          <form onsubmit="handleSubscribe(event)" class="flex gap-2 max-w-md">
+            <input type="email" required placeholder="ENTER YOUR EMAIL..." class="bg-[#121216] border border-[#23232b] px-4 py-3 text-xs font-mono text-white placeholder-neutral-500 focus:outline-none focus:border-[#ccff00] flex-1 rounded-sm">
+            <button type="submit" class="px-6 py-3 bg-[#ccff00] text-black font-mono font-bold text-xs uppercase hover:bg-white transition-colors rounded-sm">
+              JOIN
+            </button>
+          </form>
+          <span id="sub-msg" class="text-xs font-mono text-[#ccff00] mt-2 block hidden">You are on the VIP Radar list.</span>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- 8. Interactive Cart Drawer Modal -->
+  <div id="cart-drawer" class="fixed inset-0 z-50 pointer-events-none transition-all duration-300">
+    <!-- Backdrop overlay -->
+    <div id="cart-backdrop" onclick="toggleCart()" class="absolute inset-0 bg-black/70 opacity-0 transition-opacity duration-300 pointer-events-none"></div>
+
+    <!-- Side Panel -->
+    <div id="cart-panel" class="absolute top-0 right-0 w-full max-w-md h-full bg-[#0d0d11] border-l border-[#23232b] transform translate-x-full transition-transform duration-300 pointer-events-auto flex flex-col justify-between">
+      
+      <!-- Cart Header -->
+      <div class="p-6 border-b border-[#23232b] flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <i data-lucide="shopping-bag" class="w-5 h-5 text-[#ccff00]"></i>
+          <span class="font-heading font-extrabold text-lg uppercase tracking-tight">Your Cart</span>
+        </div>
+        <button onclick="toggleCart()" class="p-1 hover:text-[#ccff00] transition-colors">
+          <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+      </div>
+
+      <!-- Free Shipping Meter -->
+      <div class="px-6 py-3 bg-[#14141a] border-b border-[#23232b]">
+        <div class="flex justify-between text-xs font-mono mb-1">
+          <span id="shipping-label" class="text-neutral-300">Add ₹1,499 for Free Delivery</span>
+          <span id="shipping-target" class="text-[#ccff00]">₹1,499 Target</span>
+        </div>
+        <div class="w-full bg-[#23232b] h-1.5 rounded-full overflow-hidden">
+          <div id="shipping-bar" class="bg-[#ccff00] h-full w-0 transition-all duration-300"></div>
+        </div>
+      </div>
+
+      <!-- Cart Item List -->
+      <div id="cart-items" class="p-6 overflow-y-auto flex-1 space-y-4">
+        <!-- Rendered items go here -->
+      </div>
+
+      <!-- Cart Footer / Promo & Checkout -->
+      <div class="p-6 border-t border-[#23232b] bg-[#0c0c10]">
+        
+        <!-- Promo Code Input -->
+        <div class="flex gap-2 mb-4">
+          <input type="text" id="coupon-input" placeholder="PROMO: WNDR20" class="flex-1 bg-[#14141a] border border-[#23232b] px-3 py-2 text-xs font-mono text-white uppercase focus:outline-none focus:border-[#ccff00]">
+          <button onclick="applyCoupon()" class="px-4 py-2 bg-white text-black font-mono font-bold text-xs uppercase hover:bg-[#ccff00] transition-colors">Apply</button>
+        </div>
+
+        <div class="space-y-1.5 font-mono text-xs mb-4">
+          <div class="flex justify-between text-neutral-400">
+            <span>Subtotal</span>
+            <span id="cart-subtotal">₹0</span>
+          </div>
+          <div class="flex justify-between text-[#ccff00]">
+            <span>Discount</span>
+            <span id="cart-discount">- ₹0</span>
+          </div>
+          <div class="flex justify-between text-neutral-400">
+            <span>Shipping</span>
+            <span id="cart-shipping">₹0</span>
+          </div>
+          <div class="flex justify-between text-white font-bold text-base pt-2 border-t border-[#23232b]">
+            <span>Total</span>
+            <span id="cart-total" class="text-[#ccff00]">₹0</span>
+          </div>
+        </div>
+
+        <button onclick="checkout()" class="w-full py-4 bg-[#ccff00] text-black font-heading font-extrabold uppercase text-sm tracking-wider hover:bg-white transition-colors accent-glow flex items-center justify-center gap-2">
+          <span>Checkout Now</span>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JavaScript Application Logic -->
+  <script>
+    // Product Database
+    const PRODUCTS = [
+      {
+        id: 1,
+        name: "WNDR Cyber 280 GSM Boxy Tee",
+        category: "tee",
+        price: 1499,
+        tag: "280 GSM",
+        image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=700&q=80"
+      },
+      {
+        id: 2,
+        name: "WNDR Heavy Fleece 460 GSM Hoodie",
+        category: "hoodie",
+        price: 3299,
+        tag: "460 GSM",
+        image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=700&q=80"
+      },
+      {
+        id: 3,
+        name: "WNDR Corduroy 5-Panel Cap",
+        category: "headwear",
+        price: 1199,
+        tag: "ARCHIVAL",
+        image: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&w=700&q=80"
+      },
+      {
+        id: 4,
+        name: "WNDR Acid Mineral Wash Boxy Tee",
+        category: "tee",
+        price: 1699,
+        tag: "280 GSM",
+        image: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=700&q=80"
+      }
+    ];
+
+    let cart = [];
+    let discountPercent = 0;
+
+    // Render Products
+    function renderProducts(category = 'all') {
+      const grid = document.getElementById('product-grid');
+      const filtered = category === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.category === category);
+
+      grid.innerHTML = filtered.map(p => `
+        <div class="group bg-[#121216] border border-[#23232b] rounded-sm overflow-hidden flex flex-col justify-between hover:border-[#ccff00] transition-colors">
+          <div class="relative aspect-square overflow-hidden bg-neutral-900">
+            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover filter contrast-110 group-hover:scale-105 transition-transform duration-300" />
+            <span class="absolute top-3 left-3 bg-black/90 text-[#ccff00] border border-[#ccff00]/30 text-[10px] font-mono px-2 py-0.5 rounded-sm font-bold uppercase">
+              ${p.tag}
+            </span>
+          </div>
+
+          <div class="p-4 flex flex-col flex-1 justify-between">
+            <div>
+              <h3 class="font-heading font-bold text-sm tracking-tight text-white mb-1 group-hover:text-[#ccff00] transition-colors">${p.name}</h3>
+              <div class="font-mono text-[#ccff00] font-bold text-sm">₹${p.price.toLocaleString('en-IN')}</div>
+            </div>
+
+            <button onclick="addToCart(${p.id})" class="mt-4 w-full py-2.5 bg-[#1b1b22] hover:bg-[#ccff00] hover:text-black font-mono font-bold text-xs uppercase transition-colors flex items-center justify-center gap-1.5">
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+              <span>Add To Cart</span>
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    // Category Filter Handler
+    function filterCategory(cat) {
+      document.querySelectorAll('.cat-btn').forEach(btn => {
+        if(btn.dataset.cat === cat) {
+          btn.className = "cat-btn px-4 py-2 bg-[#ccff00] text-black font-bold uppercase rounded-sm border border-[#ccff00]";
+        } else {
+          btn.className = "cat-btn px-4 py-2 bg-[#121216] text-neutral-300 font-bold uppercase rounded-sm border border-[#23232b] hover:border-[#ccff00]";
+        }
+      });
+      renderProducts(cat);
+    }
+
+    // Cart Management
+    function addToCart(productId) {
+      const item = PRODUCTS.find(p => p.id === productId);
+      const existing = cart.find(i => i.id === productId);
+
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({ ...item, quantity: 1 });
+      }
+
+      updateCartUI();
+      openCartDrawer();
+    }
+
+    function changeQuantity(id, delta) {
+      const item = cart.find(i => i.id === id);
+      if (!item) return;
+
+      item.quantity += delta;
+      if (item.quantity <= 0) {
+        cart = cart.filter(i => i.id !== id);
+      }
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      // Counter
+      const count = cart.reduce((acc, item) => acc + item.quantity, 0);
+      document.getElementById('cart-counter').innerText = count;
+
+      // Cart Items HTML
+      const itemsContainer = document.getElementById('cart-items');
+      if (cart.length === 0) {
+        itemsContainer.innerHTML = `
+          <div class="h-full flex flex-col items-center justify-center text-center text-neutral-500 py-12">
+            <i data-lucide="shopping-bag" class="w-12 h-12 mb-3 stroke-1"></i>
+            <p class="font-mono text-xs uppercase">Your cart is currently empty.</p>
+          </div>
+        `;
+      } else {
+        itemsContainer.innerHTML = cart.map(item => `
+          <div class="flex gap-4 p-3 bg-[#15151c] border border-[#23232b] rounded-sm items-center">
+            <img src="${item.image}" class="w-16 h-16 object-cover rounded-sm" />
+            <div class="flex-1">
+              <h4 class="font-heading text-xs font-bold leading-tight mb-1 text-white">${item.name}</h4>
+              <div class="font-mono text-xs text-[#ccff00]">₹${item.price.toLocaleString('en-IN')}</div>
+              <div class="flex items-center gap-3 mt-2">
+                <button onclick="changeQuantity(${item.id}, -1)" class="w-5 h-5 bg-[#23232b] text-white flex items-center justify-center font-mono text-xs hover:bg-[#ccff00] hover:text-black">-</button>
+                <span class="font-mono text-xs font-bold">${item.quantity}</span>
+                <button onclick="changeQuantity(${item.id}, 1)" class="w-5 h-5 bg-[#23232b] text-white flex items-center justify-center font-mono text-xs hover:bg-[#ccff00] hover:text-black">+</button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Financials
+      const subtotal = cart.reduce((acc, i) => acc + (i.price * i.quantity), 0);
+      const discount = (subtotal * discountPercent) / 100;
+      const isFreeDelivery = subtotal >= 1499 || subtotal === 0;
+      const shipping = isFreeDelivery ? 0 : 99;
+      const total = Math.max(0, subtotal - discount + shipping);
+
+      document.getElementById('cart-subtotal').innerText = `₹${subtotal.toLocaleString('en-IN')}`;
+      document.getElementById('cart-discount').innerText = `- ₹${discount.toLocaleString('en-IN')}`;
+      document.getElementById('cart-shipping').innerText = isFreeDelivery ? "FREE" : `₹${shipping}`;
+      document.getElementById('cart-total').innerText = `₹${total.toLocaleString('en-IN')}`;
+
+      // Free shipping progress bar
+      const bar = document.getElementById('shipping-bar');
+      const label = document.getElementById('shipping-label');
+      if (subtotal >= 1499) {
+        bar.style.width = '100%';
+        label.innerText = '⚡ FREE Express Shipping Unlocked!';
+        label.className = 'text-[#ccff00] font-bold';
+      } else {
+        const pct = Math.min(100, (subtotal / 1499) * 100);
+        bar.style.width = `${pct}%`;
+        label.innerText = `Add ₹${(1499 - subtotal).toLocaleString('en-IN')} for Free Delivery`;
+        label.className = 'text-neutral-300';
+      }
+
+      lucide.createIcons();
+    }
+
+    // Coupon logic
+    function applyCoupon() {
+      const code = document.getElementById('coupon-input').value.trim().toUpperCase();
+      if (code === 'WNDR20') {
+        discountPercent = 20;
+        alert("20% Street Essentials discount applied!");
+      } else if (code === 'WNDR10') {
+        discountPercent = 10;
+        alert("10% VIP discount applied!");
+      } else {
+        alert("Invalid coupon code. Try 'WNDR20'");
+      }
+      updateCartUI();
+    }
+
+    // Drawer Controls
+    function toggleCart() {
+      const drawer = document.getElementById('cart-drawer');
+      const backdrop = document.getElementById('cart-backdrop');
+      const panel = document.getElementById('cart-panel');
+
+      if (panel.classList.contains('translate-x-full')) {
+        openCartDrawer();
+      } else {
+        drawer.classList.add('pointer-events-none');
+        backdrop.classList.add('opacity-0');
+        backdrop.classList.add('pointer-events-none');
+        panel.classList.add('translate-x-full');
+      }
+    }
+
+    function openCartDrawer() {
+      const drawer = document.getElementById('cart-drawer');
+      const backdrop = document.getElementById('cart-backdrop');
+      const panel = document.getElementById('cart-panel');
+
+      drawer.classList.remove('pointer-events-none');
+      backdrop.classList.remove('opacity-0');
+      backdrop.classList.remove('pointer-events-none');
+      panel.classList.remove('translate-x-full');
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+      alert("Redirecting to Razorpay / Stripe Secure Checkout...");
+    }
+
+    function handleSubscribe(e) {
+      e.preventDefault();
+      document.getElementById('sub-msg').classList.remove('hidden');
+    }
+
+    // Initialize on load
+    window.addEventListener('DOMContentLoaded', () => {
+      renderProducts();
+      updateCartUI();
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
